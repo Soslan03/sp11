@@ -6,15 +6,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 
 @Controller
 public class UserController {
-    @GetMapping("/admin")
+    @GetMapping("/")
     public String homePage(){
+        return "index";
+    }
+    @GetMapping("/index")
+    public String indexPage(){
+        return "index";
+    }
+    @GetMapping("/admin")
+    public String adminPage(Model model, Principal principal){
+        model.addAttribute("user", principal.getName());
         return "admin";
     }
     @GetMapping("/user")
-    public String showUser(Model model) {
+    public String showUser(Principal principal) {
 
 
         return "user";
